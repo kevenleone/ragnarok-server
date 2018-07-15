@@ -1,0 +1,18 @@
+{
+  "name": "ragnarokdb-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon",
+    "prod": "pm2 server.js"
+  },
+  "author": "Keven Leone dos Santos",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "consign": "^0.1.6",
+    "express": "^4.16.3",
+    "mysql": "^2.15.0"
+  }
+}
