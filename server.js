@@ -1,9 +1,14 @@
 const server = require('./config/config')
+var jwt = require('jsonwebtoken')
+var globalMethods = require('./src/util/globalMethods')
 
-server.listen(3000, () => {
-    console.log('Running in 3000')
+const PORT = process.env.PORT || 6000
+server.listen(PORT, () => {
+    console.log(`Running in ${PORT}`)
 })
 
 server.get('/', (req,res) => {
-    res.json({Greeting: 'Welcome to Ragnarok API'})
+    jwt.sign({nome: "Keven Leone dos Santos"} , globalMethods.secretKey, (err, token) => {
+        res.json({Greeting: 'Welcome to Ragnarok API', token})
+    })
 })

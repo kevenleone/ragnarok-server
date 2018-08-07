@@ -1,11 +1,13 @@
 var mysql = require('mysql')
+require('dotenv').config()
+const env = process.env
 
 var connMysql = function(){
     return mysql.createConnection({
-        database: 'ragnarok',
-        host: 'localhost',
-        user: 'root',
-        password: ''
+        database: env.DB_NAME,
+        host: env.DB_HOST,
+        user: env.DB_USER,
+        password: env.DB_PASS
     })
 }
 

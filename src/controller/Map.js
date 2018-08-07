@@ -19,6 +19,7 @@ module.exports = function(server){
             });
 
             res.send(mapInfo)
+            connection.end()
         })
 
     })

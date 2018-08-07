@@ -2,8 +2,8 @@ function MonsterDAO (connection){
     this._connection = connection;
 }
 
-MonsterDAO.prototype.getMonster = function(callback){
-    var query = 'select id, iName, r.race from mob_db mb join race r on r.id_race = mb.Race group by iName limit 100' 
+MonsterDAO.prototype.getMonster = function(start, callback){
+    var query = `select id, iName, r.race from mob_db mb join race r on r.id_race = mb.Race group by iName limit ${start}, 300` 
     this._connection.query(query, callback)
 }
 

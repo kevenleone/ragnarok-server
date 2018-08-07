@@ -22,3 +22,5 @@ module.exports.convertTimeSpawn = function (millisec) {
 module.exports.replaceBadChars = function(string){
     return string.replace(/'/g, '')
 }
+
+module.exports.secretKey = "wingardiumleviosa"
