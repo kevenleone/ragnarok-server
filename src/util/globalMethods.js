@@ -1,3 +1,5 @@
+var ip = require('ip')
+var ENV = process.env
 module.exports.convertTimeSpawn = function (millisec) {
     var seconds = (millisec / 1000).toFixed(1);
     var minutes = (millisec / (1000 * 60)).toFixed(1);
@@ -20,7 +22,27 @@ module.exports.convertTimeSpawn = function (millisec) {
 }
 
 module.exports.replaceBadChars = function(string){
-    return string.replace(/'/g, '')
+    var str = `${string}`
+    return str.replace(/'/g, '')
 }
 
-module.exports.secretKey = "wingardiumleviosa"
+module.exports.verifyToken = function(req, res, next){
+    const bearerHeader = req.headers['authorization']
+    if(typeof bearerHeader !== 'undefined'){
+        var bearer = bearerHeader.split(' ')
+        var bearerToken = bearer[1]
+        req.token = bearerToken
+        next()
+    } else {
+        console.log('access denied')
+        res.status(401).json({Error: "Access Denied"})
+    }   
+}
+
+if(ENV.ENV == "DEV"){
+    module.exports.URL = `${ip.address()}:${ENV.PORT}`
+} else {
+    module.exports.URL = "https://ragnarokdb.herokuapp.com"
+}
+
+module.exports.secretKey = "wingardiumleviosa123"

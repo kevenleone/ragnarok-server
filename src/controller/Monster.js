@@ -9,7 +9,7 @@ function geraJsonMonster(seq, id, item, slot, dropChance, mvp = false){
     
     if(item !== null){
         if(slot !== null){
-            item = item + ' ('+slot+')'
+            item = `${item} ('${slot})`
         }
 
         retorno = {
@@ -37,7 +37,6 @@ module.exports = function(server){
                 start = 0;
             }
 
-            console.log(page)
             MonsterDAO.getMonster(start,(err, monster) => {
                 if(err){
                     res.json({err})
@@ -45,7 +44,7 @@ module.exports = function(server){
                 }
 
                 monster.forEach(mob => {
-                    mob.avatar = `http://file5.ratemyserver.net/mobs/${mob.id}.gif`
+                    mob.avatar = `${globalMethods.URL}/image/animated/${mob.id}`
                     mob.background = monsterUtil.getMonsterBackground(mob.race)
                 });
                 res.status(200).json(monster)
@@ -71,7 +70,8 @@ module.exports = function(server){
 
                         if(monsterDetail.length > 0){
                             monsterDetail.forEach(mob => {
-                                mob.avatar = `http://file5.ratemyserver.net/mobs/${mob.id}.gif`
+                                mob.avatar = `${globalMethods.URL}/image/animated/${mob.id}`
+
                                 mob.background = monsterUtil.getMonsterBackground(mob.race)
                             });
 
@@ -123,23 +123,4 @@ module.exports = function(server){
                 })
             })
         })
-
-
-    server.get('/avatar/:pst/:img', (req, res) => {
-        var path = './images'
-        var pst = req.params.pst
-        var img = req.params.img
-    
-        var file = `${path}/${pst}/${img}`
-        
-        fs.readFile(file, (err, content) => {
-            if(err){
-                res.send(err);
-                return ;
-            }
-            res.writeHead(200, { 'content-type' : 'image/jpg'});
-            res.end(content);
-        })
-    })
-
 }
