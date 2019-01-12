@@ -1,5 +1,4 @@
-const server = require('./config/config')
-var globalMethods = require('./src/util/globalMethods')
+const server = require('./config/Loader')
 
 const PORT = process.env.PORT || 8000
 server.listen(PORT, () => {

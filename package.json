@@ -4,19 +4,21 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon",
-    "prod": "pm2 server.js"
+    "dev": "nodemon server --env=dev",
+    "prod": "nodemon server --env=prod",
+    "local": "nodemon server --env=prod_local"
   },
   "author": "Keven Leone dos Santos",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "consign": "^0.1.6",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
-    "ip": "^1.1.5",
     "jsonwebtoken": "^8.3.0",
-    "md5": "^2.2.1",
-    "mysql": "^2.15.0"
+    "mysql": "^2.16.0",
+    "yargs": "^12.0.5"
+  },
+  "devDependencies": {
+    "youch": "^2.0.10"
   }
 }

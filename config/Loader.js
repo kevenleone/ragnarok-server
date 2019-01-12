@@ -1,7 +1,9 @@
-var bodyParser = require('body-parser')
-var consign = require('consign')
-var express = require('express')
-var server = express()
+const bodyParser = require('body-parser')
+const express = require('express')
+const server = express()
+
+const MapRouter = require('../src/Routes/Map');
+const MonsterRouter = require('../src/Routes/Monster');
 
 server.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -12,13 +14,11 @@ server.use((req, res, next) => {
 });
 
 server.use(bodyParser.urlencoded({extended: true}))
-server.use(bodyParser.json())
+server.use(bodyParser.json());
 
-consign()
-    .include('config/database.js')
-    .then('src/models')
-    .then('src/controller')
-    .then('src/util')
-    .into(server)
+
+server.use('/', MapRouter);
+server.use('/', MonsterRouter);
+
 
 module.exports = server
