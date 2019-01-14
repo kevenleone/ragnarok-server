@@ -1,2 +1,3 @@
 node_modules
-.env
+envs/.env_local
+envs/.env_production

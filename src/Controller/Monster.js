@@ -16,7 +16,7 @@ class Monster extends Controller {
             mvp: mvp
         }
 
-        data.item = item !== null && slow !== null ? `${item} (${slot})` : item
+        data.item = item !== null && slot !== null ? `${item} (${slot})` : item
 
         return data
     }
@@ -27,11 +27,12 @@ class Monster extends Controller {
 
         MonsterDAO.getMonster(start).then(monsterData => {
             monsterData.forEach(monster => {
-                monster.avatar = `${this.URL}/image/animated/${monster.id}`
-                monster.background = this.getMonsterBackground(monster.race)
+                monster.avatar = `${this.URL}/img/animated/${monster.id}`;
+                monster.background = this.getMonsterBackground(monster.race);
+                monster.detail = `${this.URL}/monster/details/${monster.id}`;
             });
-
             this.sendSuccessResponse(req, res, next, {monsterData})
+
         }).catch(err => {
             this.sendErrorResponse(req, res, next, err);
         })
@@ -41,7 +42,7 @@ class Monster extends Controller {
         let drops = []
         let monsterId = this.replaceBadChars(req.params.id)
 
-        try {
+            try {
             let monsterHome = await MonsterDAO.getMonsterHome(monsterId);
             let monsterDrops = await MonsterDAO.getMonsterDrops(monsterId);
             let monsterSkill = await MonsterDAO.getMonsterSkill(monsterId);
@@ -49,8 +50,7 @@ class Monster extends Controller {
 
             if (monsterDetail.length > 0) {
                 monsterDetail.forEach(detail => {
-                    detail.avatar = `${this.URL}/image/animated/${detail.id}`
-
+                    detail.avatar = `${this.URL}/img/animated/${detail.ID}`
                     detail.background = this.getMonsterBackground(detail.race)
                 });
 
@@ -95,8 +95,8 @@ class Monster extends Controller {
             }
 
             this.sendSuccessResponse(req, res, next, {monsterDetail,monsterHome,monsterSkill,drops,})
-        } catch {
-            this.sendErrorResponse(req, res, next, `Erro!!`)
+        } catch (err){
+            this.sendErrorResponse(req, res, next, err)
         }
     }
 }

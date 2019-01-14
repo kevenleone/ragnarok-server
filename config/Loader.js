@@ -2,8 +2,10 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const server = express()
 
+const ImagesRouter = require('../src/Routes/Images');
 const MapRouter = require('../src/Routes/Map');
 const MonsterRouter = require('../src/Routes/Monster');
+const UserRouter = require('../src/Routes/User');
 
 server.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -18,7 +20,10 @@ server.use(bodyParser.json());
 
 
 server.use('/', MapRouter);
+server.use('/', UserRouter);
+server.use('/img', ImagesRouter);
 server.use('/', MonsterRouter);
+
 
 
 module.exports = server

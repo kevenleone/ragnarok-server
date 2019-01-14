@@ -4,7 +4,7 @@ class globalMethods {
 
     constructor() {
         this.secretKey = "wingardiumleviosa123";
-        this.URL = ENV.ENV === "DEV" ? `${ENV.HOST}:${ENV.PORT}` : "https://ragnarokdb.herokuapp.com"
+        this.URL = ENV.ENV !== "PROD" ? `${ENV.HOST}:${ENV.PORT}` : "https://ragnarokdb.herokuapp.com"
     }
 
     convertTimeSpawn (millisec) {

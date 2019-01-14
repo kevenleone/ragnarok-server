@@ -9,12 +9,12 @@ const mysql = require('mysql')
 class Model {
 
     constructor(){
-        this.connection = mysql.createConnection({
+        this.connection = mysql.createPool({
             host: ENV.DB_HOST,
             user: ENV.DB_USER,
             password: ENV.DB_PASSWORD,
             database: ENV.DB_DATABASE,
-            port: ENV.DB_PORT
+            port: ENV.DB_PORT,
         });
     }
 
@@ -27,6 +27,7 @@ class Model {
                 resolve(rows)
             });
         });
+
     }
 
     close() {

@@ -32,7 +32,7 @@ class Controller extends GlobalMethods {
         res.send(await youch.toHTML())
 
         // res.status(400).send({status: 400, error});
-        next();
+        //next();
      }
 
      sendImageResponse(req, res, next, image){

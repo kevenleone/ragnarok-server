@@ -6,10 +6,11 @@ class Map extends Model {
     }
 
     mapInfo(map){
-        return this.query(`select md.iName, id, md.LV, md.HP, md.EXP, sum(quantity) total, spawntime from mob_place mp
-        join mob_db md on mp.mobId = md.ID
-        where map = '${map}'
-        group by monster order by iName`);
+        return this.query(`select * from mob_place`).then((value => {
+            console.log(value)
+        })).catch(err => {
+            console.log(err)
+        });
     }
 }
 

@@ -10,16 +10,10 @@ class Map extends Controller {
     Map(req, res, next) {
         let mapa = this.replaceBadChars(req.params.map)
 
-        MapDAO.mapInfo(mapa).then(mapInfo => {
-
-            mapInfo.forEach(element => {
-                element.spawntime = this.convertTimeSpawn(element.spawntime)
-                element.iName = `${element.iName} (${element.LV})`
-            });
-
-            this.sendSuccessResponse(req, res, next, mapInfo);
+        MapDAO.mapInfo('q').then(aa => {
+            res.send('q')
         }).catch(err => {
-            this.sendErrorResponse(req, res, next, err);
+            res.send('err')
         })
     }
 }

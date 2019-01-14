@@ -16,9 +16,9 @@ class Images extends Controller {
         fs.readFile(file, (err, content) => {
             if (err) {
                 this.sendErrorResponse(req, res, next, 'Image not found, bro')
-                return;
+            } else {
+                this.sendImageResponse(req, res, next, content);
             }
-            this.sendImageResponse(req, res, next, content);
         })
     }
 }
