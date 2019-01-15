@@ -5,17 +5,18 @@ Global.Enviroment();
 
 const ENV = process.env
 const mysql = require('mysql')
+const connection = mysql.createConnection({
+    host: ENV.DB_HOST,
+    user: ENV.DB_USER,
+    password: ENV.DB_PASSWORD,
+    database: ENV.DB_DATABASE,
+    port: ENV.DB_PORT,
+});
 
 class Model {
 
     constructor(){
-        this.connection = mysql.createPool({
-            host: ENV.DB_HOST,
-            user: ENV.DB_USER,
-            password: ENV.DB_PASSWORD,
-            database: ENV.DB_DATABASE,
-            port: ENV.DB_PORT,
-        });
+        this.connection = connection;
     }
 
     async query(sql, args = '') {

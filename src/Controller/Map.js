@@ -9,12 +9,9 @@ class Map extends Controller {
 
     Map(req, res, next) {
         let mapa = this.replaceBadChars(req.params.map)
-
-        MapDAO.mapInfo('q').then(aa => {
-            res.send('q')
-        }).catch(err => {
-            res.send('err')
-        })
+        MapDAO.mapInfo(mapa).then(map => {
+            this.sendSuccessResponse(req, res, next, map)
+        }).catch(err => this.sendErrorResponse(req, res, next, err))
     }
 }
 

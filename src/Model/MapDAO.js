@@ -6,11 +6,7 @@ class Map extends Model {
     }
 
     mapInfo(map){
-        return this.query(`select * from mob_place`).then((value => {
-            console.log(value)
-        })).catch(err => {
-            console.log(err)
-        });
+        return this.query(`select * from mob_place where map = '${map}'`)
     }
 }
 
