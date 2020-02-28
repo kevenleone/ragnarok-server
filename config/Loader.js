@@ -1,11 +1,11 @@
-const bodyParser = require('body-parser')
-const express = require('express')
-const server = express()
-
-const ImagesRouter = require('../src/Routes/Images');
-const MapRouter = require('../src/Routes/Map');
+require('dotenv').config();
+const bodyParser = require('body-parser');
+const express = require('express');
+const server = express();
 const MonsterRouter = require('../src/Routes/Monster');
+const ImagesRouter = require('../src/Routes/Images');
 const UserRouter = require('../src/Routes/User');
+const MapRouter = require('../src/Routes/Map');
 
 server.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -15,9 +15,8 @@ server.use((req, res, next) => {
     next();
 });
 
-server.use(bodyParser.urlencoded({extended: true}))
+server.use(bodyParser.urlencoded({extended: true}));
 server.use(bodyParser.json());
-
 
 server.use('/', MapRouter);
 server.use('/', UserRouter);

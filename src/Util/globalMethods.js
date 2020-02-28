@@ -1,5 +1,4 @@
-var ENV = process.env
-
+var ENV = process.env;
 class globalMethods {
 
     constructor() {

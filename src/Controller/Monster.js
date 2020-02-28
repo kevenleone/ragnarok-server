@@ -18,12 +18,12 @@ class Monster extends Controller {
 
         data.item = item !== null && slot !== null ? `${item} (${slot})` : item
 
-        return data
+        return data;
     }
 
     Monsters(req, res, next) {
         let page = req.query.page || 0
-        let start = page !== 0 ? page * 300 : 0;
+        let start = page !== 0 ? page * 100 : 0;
 
         MonsterDAO.getMonster(start).then(monsterData => {
             monsterData.forEach(monster => {
@@ -58,6 +58,8 @@ class Monster extends Controller {
                     home.spawn = this.convertTimeSpawn(home.spawntime)
                     home.mapTitle = "Calabouço de Prontera"
                 });
+
+                console.log(this.jsonMonster(monsterDrops[0]))
 
                 let Item1 = this.geraJsonMonster(1, monsterDrops[0].ID1, monsterDrops[0].Item1, monsterDrops[0].Slot1, monsterDrops[0].DropChance1)
                 let Item2 = this.geraJsonMonster(2, monsterDrops[0].ID2, monsterDrops[0].Item2, monsterDrops[0].Slot2, monsterDrops[0].DropChance2)
